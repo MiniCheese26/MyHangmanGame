@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -113,15 +113,7 @@ namespace hangmanGame
                         WinMethod();
                     }
 
-                    if (Attempts == Hangman.Length - 1) { LostMethod(); }
-                    Console.WriteLine("\nSorry that was incorrect!\n");
-
-                    Console.WriteLine(Hangman[Attempts]);
-
-                    Console.WriteLine("\nPress any key to continue...");
-                    Attempts++;
-                    Console.ReadKey();
-                    Console.Clear();
+                    IncorrectGuess(guess);
                     continue;
                 }
 
@@ -129,19 +121,7 @@ namespace hangmanGame
 
                 IReadOnlyCollection<int> indexes = CurrentWord.GetAllIndexes(guess).ToList().AsReadOnly();
 
-                if (indexes.Count == 0)
-                {
-                    if (Attempts == Hangman.Length - 1) { LostMethod(); }
-                    Console.WriteLine($"\n{guess} is incorrect!\n");
-
-                    Console.WriteLine(Hangman[Attempts]);
-
-                    Console.WriteLine("\nPress any key to continue...");
-                    Attempts++;
-                    Console.ReadKey();
-                    Console.Clear();
-                    continue;
-                }
+                if (indexes.Count == 0) { IncorrectGuess(guess); continue;}
 
                 GuessedWord = GuessProcessing.UpdateGuessedWord(indexes);
 
@@ -152,6 +132,19 @@ namespace hangmanGame
 
                 Console.Clear();
             }
+        }
+
+        private static void IncorrectGuess(string guess)
+        {
+            if (Attempts == Hangman.Length - 1) { LostMethod(); }
+            Console.WriteLine($"\n{guess} is incorrect!\n");
+
+            Console.WriteLine(Hangman[Attempts]);
+
+            Console.WriteLine("\nPress any key to continue...");
+            Attempts++;
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private static string TakeCurrentWordInput()
