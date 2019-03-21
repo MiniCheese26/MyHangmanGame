@@ -30,7 +30,7 @@ namespace hangmanGame
             return sb.ToString();
         }
 
-        internal static bool CheckIfWon()
+        internal static bool HasWon()
         {
             return !Program.GuessedWord.Contains("_");
         }

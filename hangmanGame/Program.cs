@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -101,7 +101,7 @@ namespace hangmanGame
                     Console.Write("\nEnter guess to complete: ");
                     var completeGuess = Console.ReadLine()?.ToLower().Trim();
 
-                    while (string.IsNullOrEmpty(completeGuess) || completeGuess.ContainsInt())
+                    while (string.IsNullOrWhiteSpace(completeGuess) || completeGuess.ContainsInt())
                     {
                         Console.WriteLine("\nThat ain't a correct guess chief");
                         Console.Write("Enter guess: ");
@@ -125,7 +125,7 @@ namespace hangmanGame
 
                 GuessedWord = GuessProcessing.UpdateGuessedWord(indexes);
 
-                if (GuessProcessing.CheckIfWon())
+                if (GuessProcessing.HasWon())
                 {
                     WinMethod();
                 }
