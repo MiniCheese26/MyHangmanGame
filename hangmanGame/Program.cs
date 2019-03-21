@@ -101,11 +101,11 @@ namespace hangmanGame
                     Console.Write("\nEnter guess to complete: ");
                     var completeGuess = Console.ReadLine()?.ToLower().Trim();
 
-                    while (string.IsNullOrEmpty(guess) || guess.IsInt() || guess.ContainsInt())
+                    while (string.IsNullOrEmpty(completeGuess) || completeGuess.ContainsInt())
                     {
                         Console.WriteLine("\nThat ain't a correct guess chief");
                         Console.Write("Enter guess: ");
-                        guess = Console.ReadLine()?.ToLower().Trim();
+                        completeGuess = Console.ReadLine()?.ToLower().Trim();
                     }
 
                     if (completeGuess == CurrentWord)
@@ -113,7 +113,7 @@ namespace hangmanGame
                         WinMethod();
                     }
 
-                    IncorrectGuess(guess);
+                    IncorrectGuess(completeGuess);
                     continue;
                 }
 
